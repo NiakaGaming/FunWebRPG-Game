@@ -18,6 +18,17 @@ body {
     font-weight: normal;
 }
 
+p,
+ul,
+li,
+button {
+    /* FONTS */
+    font-family: "Pixelify";
+    font-optical-sizing: auto;
+    font-weight: normal;
+    font-style: normal;
+}
+
 /* ------------- */
 /* -- BUTTONS -- */
 /* ------------- */
@@ -32,11 +43,6 @@ button {
     display: block;
     margin: 25px 0px;
     box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-    /* FONTS */
-    font-family: "Pixelify";
-    font-optical-sizing: auto;
-    font-weight: normal;
-    font-style: normal;
 }
 
 button:hover {
@@ -90,7 +96,7 @@ button:active {
     width: 100vw;
 }
 
-.play>button {
+.play button {
     font-size: 35px;
 }
 
@@ -99,11 +105,26 @@ button:active {
     padding: 10px;
 }
 
+/* --------- */
+/* -- HUNT-- */
+/* --------- */
 .buttonHunt {
     width: 150px;
     padding: 15px;
 }
 
+.huntResult {
+    /* visibility: hidden; */
+}
+
+.buttonCloseHunt {
+    width: 150px;
+    padding: 5px;
+}
+
+/* ------------- */
+/* -- PLAYER -- */
+/* ------------- */
 .player {
     display: flex;
     width: 34%;
@@ -139,6 +160,7 @@ button:active {
     background-clip: padding-box;
     border-bottom: 2px solid var(--bg);
     width: 93.75%;
+    font-size: 0.925rem;
 }
 
 .player>ul>li:nth-last-child(1) {

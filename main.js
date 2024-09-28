@@ -36,15 +36,28 @@ levels = {
     10: 12800,
 }
 
+// START BY PUTTING ALL INFOS AT THE RIGHT PLACE
+window.onload = function () {
+    characterLevel.textContent = player.stats.level;
+    characterExp.textContent = player.stats.experience + " / " + levels[player.stats.level];
+};
+
 // BUTTONS
 const buttonContinue = document.getElementsByClassName("continuePlayer")[0];
 const buttonNew = document.getElementsByClassName("newPlayer")[0];
 const buttonQuit = document.getElementsByClassName("quit")[0];
+const buttonHunt = document.getElementsByClassName("buttonHunt")[0];
+const buttonCloseHunt = document.getElementsByClassName("buttonCloseHunt")[0];
 // PANELS
 const playPanel = document.getElementsByClassName("play")[0];
 const startPanel = document.getElementsByClassName("start")[0];
+const huntResult = document.getElementsByClassName("huntResult")[0];
+// CHARACTER STATS PALCEHOLDER
+const characterLevel = document.getElementsByClassName("characterLevel")[0];
+const characterExp = document.getElementsByClassName("characterExp")[0];
+const expMax = document.getElementsByClassName("expMax")[0];
 
-
+// CHANGE FROM START TO PLAY PANELS
 buttonContinue.addEventListener("click", (e) => {
     playPanel.style = "display:flex";
     startPanel.style = "display:none";
@@ -53,3 +66,29 @@ buttonQuit.addEventListener("click", (e) => {
     playPanel.style = "display:none";
     startPanel.style = "display:block";
 });
+
+
+buttonHunt.addEventListener("click", (e) => {
+    if (huntResult.style.visibility != "visible" || huntResult.style.visibilityvisibility == "") {
+        huntResult.style = "visibility:visible"
+
+        // ADD EXPERIENCE PER HUNT
+        getExp()
+    }
+
+});
+buttonCloseHunt.addEventListener("click", (e) => {
+    if (huntResult.style.visibility == "visible") {
+        huntResult.style = "visibility:hidden"
+    }
+});
+
+function getExp() {
+    player.stats.experience += 10;
+    if (player.stats.experience >= levels[player.stats.level]) {
+        player.stats.level += 1;
+        characterLevel.textContent = player.stats.level;
+    }
+    characterExp.textContent = player.stats.experience + " / " + levels[player.stats.level];
+    expMax.style.width = (player.stats.experience / levels[player.stats.level]) * 100 + "%";
+}
