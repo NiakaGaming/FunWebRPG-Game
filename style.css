@@ -1,0 +1,180 @@
+body {
+    margin: 0;
+    background-color: var(--bg);
+}
+
+:root {
+    --button: #DC5F00;
+    --button-active: #FF7710;
+    --bg: #686D76;
+    --bgContrast: #373A40;
+
+    --thirdColor: #EEEEEE;
+}
+
+@font-face {
+    font-family: "Pixelify";
+    src: url(./PixelifySans-VariableFont_wght.ttf);
+    font-weight: normal;
+}
+
+/* ------------- */
+/* -- BUTTONS -- */
+/* ------------- */
+button {
+    background-color: var(--button);
+    border: 5px solid var(--bgContrast);
+    background-clip: padding-box;
+    color: var(--bgContrast);
+    text-align: center;
+    text-decoration: none;
+    cursor: pointer;
+    display: block;
+    margin: 25px 0px;
+    box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    /* FONTS */
+    font-family: "Pixelify";
+    font-optical-sizing: auto;
+    font-weight: normal;
+    font-style: normal;
+}
+
+button:hover {
+    background-color: var(--button-active);
+    border: 5px solid var(--bgContrast);
+    color: var(--bg);
+}
+
+button:active {
+    background-color: var(--button-active);
+    box-shadow: 0 5px #666;
+    transform: translateY(4px);
+    box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+/* ----------- */
+/* -- START -- */
+/* ----------- */
+.start {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    margin-right: -50%;
+    transform: translate(-50%, -50%);
+}
+
+.start>button {
+    width: 250px;
+    font-size: 35px;
+    padding: 15px;
+}
+
+/* ---------- */
+/* -- PLAY -- */
+/* ---------- */
+
+.play {
+    /* START WITHOUT IT */
+    display: none;
+    /* display: flex; */
+    /* GETS SPREAD EVENLY */
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    /* GETS CENTERED IN SCREEN */
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    margin-right: -50%;
+    transform: translate(-50%, -50%);
+    width: 100vw;
+}
+
+.play>button {
+    font-size: 35px;
+}
+
+.quit {
+    width: 75px;
+    padding: 10px;
+}
+
+.buttonHunt {
+    width: 150px;
+    padding: 15px;
+}
+
+.player {
+    display: flex;
+    width: 34%;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.player>img {
+    border: 2px solid var(--button-active);
+    background-color: #373A40;
+}
+
+.player>ul {
+    list-style-type: none;
+
+    background-color: #373A40;
+    color: var(--thirdColor);
+
+    border: 2px solid var(--button-active);
+    width: 100%;
+    height: 320px;
+    padding: 0;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+}
+
+.player>ul>li {
+    list-style-type: none;
+    padding: 8px 10px;
+    background-clip: padding-box;
+    border-bottom: 2px solid var(--bg);
+    width: 93.75%;
+}
+
+.player>ul>li:nth-last-child(1) {
+    border-bottom: 0;
+}
+
+.level {
+    display: flex;
+    padding: 0 !important;
+    width: 100% !important;
+}
+
+.level>div:nth-child(1) {
+    width: 25%;
+    padding: 8px 10px;
+}
+
+.level>div:nth-child(2) {
+    width: 75%;
+    background-color: var(--bg);
+    border: 2px solid var(--bgContrast);
+    margin-top: 2px;
+    position: relative;
+}
+
+.expMax {
+    background: var(--button);
+    width: 0%;
+    height: 100%;
+    align-content: center;
+    text-align: center;
+}
+
+.level>div:nth-child(2)>p {
+    position: absolute;
+    left: 50%;
+    top: 0%;
+    transform: translate(-50%, -50%);
+}
