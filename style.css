@@ -94,6 +94,7 @@ button:active {
     margin-right: -50%;
     transform: translate(-50%, -50%);
     width: 100vw;
+    height: 100%;
 }
 
 .play button {
@@ -103,6 +104,11 @@ button:active {
 .quit {
     width: 75px;
     padding: 10px;
+
+    position: absolute;
+    right: 0;
+    top: 0;
+    margin: 25px;
 }
 
 /* --------- */
@@ -127,13 +133,12 @@ button:active {
 /* ------------- */
 .player {
     display: flex;
-    width: 34%;
+    width: 80%;
     justify-content: space-around;
     align-items: center;
 }
 
 .player>img {
-    border: 2px solid var(--button-active);
     background-color: #373A40;
 }
 
@@ -143,30 +148,38 @@ button:active {
     background-color: #373A40;
     color: var(--thirdColor);
 
-    border: 2px solid var(--button-active);
-    width: 100%;
-    height: 320px;
     padding: 0;
 
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: space-evenly;
     align-items: flex-start;
 }
 
 .player>ul>li {
     list-style-type: none;
-    padding: 8px 10px;
+    padding: 0 10px;
     background-clip: padding-box;
     border-bottom: 2px solid var(--bg);
-    width: 93.75%;
+    width: 94.9%;
     font-size: 0.925rem;
+    height: 100%;
+    align-content: center;
 }
 
 .player>ul>li:nth-last-child(1) {
     border-bottom: 0;
 }
 
+.player>* {
+    flex: 2;
+    height: 100%;
+    border: 2px solid var(--button-active);
+}
+
+/* ----------- */
+/* -- LEVEL -- */
+/* ----------- */
 .level {
     display: flex;
     padding: 0 !important;
@@ -182,7 +195,6 @@ button:active {
     width: 75%;
     background-color: var(--bg);
     border: 2px solid var(--bgContrast);
-    margin-top: 2px;
     position: relative;
 }
 
@@ -199,4 +211,82 @@ button:active {
     left: 50%;
     top: 0%;
     transform: translate(-50%, -50%);
+}
+
+/* -------- */
+/* -- HP -- */
+/* -------- */
+
+.hp {
+    display: flex;
+    padding: 0 !important;
+    width: 100% !important;
+}
+
+.hp>div:nth-child(1) {
+    width: 25%;
+    padding: 8px 10px;
+}
+
+.hp>div:nth-child(2) {
+    width: 75%;
+    background-color: var(--bg);
+    border: 2px solid var(--bgContrast);
+    position: relative;
+}
+
+.hpMax {
+    background: red;
+    width: 100%;
+    height: 100%;
+    align-content: center;
+    text-align: center;
+}
+
+.hp>div:nth-child(2)>p {
+    position: absolute;
+    left: 50%;
+    top: 0%;
+    transform: translate(-50%, -50%);
+}
+
+/* ---------------- */
+/* -- INVENTORTY -- */
+/* ---------------- */
+.inventory {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.row {
+    width: 100%;
+    height: 25%;
+    border-top: 1px solid var(--bgContrast);
+
+    display: flex;
+}
+
+.row:nth-child(4) {
+    border-bottom: 1px solid var(--bgContrast);
+}
+
+.col {
+    width: 25%;
+    height: 100%;
+    border-left: 1px solid var(--bgContrast);
+    box-shadow: inset 0 0 10px var(--button-active);
+}
+
+.col:nth-child(4) {
+    border-right: 1px solid var(--bgContrast);
+}
+
+.col:hover {
+    box-shadow: inset 0 0 10px var(--thirdColor);
+}
+
+.col:active {
+    box-shadow: inset 0 0 10px var(--thirdColor);
+    transform: translateY(1px);
 }

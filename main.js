@@ -11,7 +11,8 @@ player = {
         // magicDefense: 0,
         level: 1,
         experience: 0,
-        hp: 1,
+        hp: 100,
+        maxHp: 100,
         // mp: 0,
     },
     gear: {
@@ -20,6 +21,7 @@ player = {
     },
     items: [
         "minor health potion",
+        "wood",
     ]
 }
 
@@ -40,6 +42,7 @@ levels = {
 window.onload = function () {
     characterLevel.textContent = player.stats.level;
     characterExp.textContent = player.stats.experience + " / " + levels[player.stats.level];
+    characterHpBar.textContent = player.stats.hp + " / " + player.stats.maxHp;
 };
 
 // BUTTONS
@@ -56,6 +59,8 @@ const huntResult = document.getElementsByClassName("huntResult")[0];
 const characterLevel = document.getElementsByClassName("characterLevel")[0];
 const characterExp = document.getElementsByClassName("characterExp")[0];
 const expMax = document.getElementsByClassName("expMax")[0];
+const characterHpBar = document.getElementsByClassName("characterHpBar")[0];
+const hpMax = document.getElementsByClassName("hpMax")[0];
 
 // CHANGE FROM START TO PLAY PANELS
 buttonContinue.addEventListener("click", (e) => {
@@ -73,7 +78,8 @@ buttonHunt.addEventListener("click", (e) => {
         huntResult.style = "visibility:visible"
 
         // ADD EXPERIENCE PER HUNT
-        getExp()
+        fight();
+        getExp();
     }
 
 });
@@ -91,4 +97,13 @@ function getExp() {
     }
     characterExp.textContent = player.stats.experience + " / " + levels[player.stats.level];
     expMax.style.width = (player.stats.experience / levels[player.stats.level]) * 100 + "%";
+}
+
+function fight() {
+    const random = Math.floor(Math.random() * 10);
+    player.stats.hp -= random;
+    characterHpBar.textContent = player.stats.hp + " / " + player.stats.maxHp;
+    hpMax.style.width = (player.stats.hp / player.stats.maxHp) * 100 + "%";
+
+    // If maxHp <= 0 THEN DEAD
 }

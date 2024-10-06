@@ -20,9 +20,13 @@
         <button class="newPlayer">NEW PLAYER</button>
     </section>
     <section class="play">
-        <button class="quit">X</button>
+
+        <div>
+            <button class="quit">X</button>
+        </div>
+
         <div class="player">
-            <img src="./character_nobg.png" alt="">
+            <!-- CHARACTERS STAT -->
             <ul>
                 <li class="level">
                     <div>
@@ -33,7 +37,16 @@
                         <p class="characterExp">0 / 25</p>
                     </div>
                 </li>
-                <li>HP / HP MAX</li>
+                <li class="hp">
+                    <div>
+                        Health
+                    </div>
+                    <div>
+                        <div class="hpMax"></div>
+                        <p class="characterHpBar">100 / 100</p>
+                    </div>
+                </li>
+                </li>
                 <li>Defense</li>
                 <li>iLevel</li>
                 <li>Strenght</li>
@@ -42,6 +55,43 @@
                 <li>Consitution</li>
                 <li>Speed</li>
             </ul>
+
+            <!-- CHARACTERS AVATAR -->
+            <img src="./character_nobg.png" alt="">
+
+            <!-- CHARACTERS GEAR -->
+            <div>
+
+            </div>
+
+            <!-- CHARACTERS INVENTORTY -->
+            <div class="inventory">
+                <div class="row">
+                    <div class="col"></div>
+                    <div class="col"></div>
+                    <div class="col"></div>
+                    <div class="col"></div>
+                </div>
+                <div class="row">
+                    <div class="col"></div>
+                    <div class="col"></div>
+                    <div class="col"></div>
+                    <div class="col"></div>
+                </div>
+                <div class="row">
+                    <div class="col"></div>
+                    <div class="col"></div>
+                    <div class="col"></div>
+                    <div class="col"></div>
+                </div>
+                <div class="row">
+                    <div class="col"></div>
+                    <div class="col"></div>
+                    <div class="col"></div>
+                    <div class="col"></div>
+                </div>
+            </div>
+
         </div>
         <div>
             <button class="buttonHunt">HUNT</button>

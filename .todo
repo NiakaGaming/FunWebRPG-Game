@@ -1,10 +1,14 @@
 ☐ Create "rpg game" in html js @started(24-09-27 12:00)
 ☐ Player stats @started(24-09-28 03:26)
 ☐ Force, agility, intelligence, speed, endurance
-☐ Btn to "hunt" : get xp or stats 
+☐ Btn to "hunt" : get xp or stats @started(24-09-28 05:02)
 ☐ Add abilities, like "slash" or "charge" 
-☐ Add a level up panel 
+☐ Add a level up panel (can add stat points)
 ✔ Add player sprite (pixels) @done(24-09-27 13:33)
 ✔ Add Fonts (Pixelify) @done(24-09-28 03:26)
+☐ "Hunt" get more exp depending on damage / iLevel
+☐ Remove buttonCloseHunt & make buttonHunt an ilimited button
+☐ Add a Gear Panel @started(24-10-06 04:06)
+☐ Add an Inventory Panel @started(24-10-06 04:07)
  
 - Jianghu / wuxia style
