@@ -20,8 +20,22 @@ player = {
         secondHand: "wooden shield",
     },
     items: [
-        "minor health potion",
-        "wood",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
     ]
 }
 
@@ -107,3 +121,37 @@ function fight() {
 
     // If maxHp <= 0 THEN DEAD
 }
+
+// ADD AN ITEM WHEN "F" IS PRESSED
+// minor health potion
+addEventListener("keypress", (e) => {
+    if (e.key == "f" && playPanel.style.display == "flex") {
+        // Add item in DB
+        // Check available space in inventory and add item if empty
+        let newIndex = -1;
+        let isEmpty = true;
+        player.items.forEach((element, index) => {
+            if (element == "" && isEmpty == true) {
+                newIndex = index;
+                isEmpty = false;
+            }
+        });
+
+        // If newIndex != -1 (if not full) => add items in the right place in DB
+        // And add it in the right place in inventory
+        let newItem = document.getElementsByClassName("inv-" + newIndex)[0];
+
+        if (newIndex != -1 && !newItem.hasChildNodes()) {
+            player.items[newIndex] = "minor health potion";
+            // Create HTML Visual
+            // Item index == Inventory place
+            newItem.appendChild(document.createElement("img"));
+
+            newItem.childNodes[0].classList.add("inv-item");
+            newItem.childNodes[0].src = "./Assets/16x16 RPG Item Pack/Item__28.png";
+        }
+        else {
+            console.log("Inventory Full");
+        }
+    }
+});
