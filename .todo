@@ -7,11 +7,13 @@
 ✔ Add player sprite (pixels) @done(24-09-27 13:33)
 ✔ Add Fonts (Pixelify) @done(24-09-28 03:26)
 ☐ "Hunt" get more exp depending on damage / iLevel
-☐ Remove buttonCloseHunt & make buttonHunt an ilimited button
+☐ Remove buttonCloseHunt & make buttonHunt an ilimited button (maybe ?)
 ☐ Add a Gear Panel @started(24-10-06 04:06)
 ☐ Add an Inventory Panel @started(24-10-06 04:07)
     ✔ Items added in iventory (with a key pressed) @done(25-01-04 13:15)
-        ☐ Items added when droped after Hunt
+        ☐ Items added when droped after Hunt @started(25-01-04 15:33)
+            ✔ Potions @done(25-01-04 15:33)
+    ✔ Items use @done(25-01-04 15:53)
     ☐ Items drag and drop
  
 - Jianghu / wuxia style

@@ -19,7 +19,7 @@ player = {
         weapon: "wooden sword",
         secondHand: "wooden shield",
     },
-    items: [
+    inventory: [
         "",
         "",
         "",
@@ -52,6 +52,25 @@ levels = {
     10: 12800,
 }
 
+items = [
+    Minor_health_potion = {
+        label: "Minor health potion",
+        description: "Restore 20 HP",
+        src: "./Assets/items/minor_health_potion.png",
+        type: "potion",
+        use: 20,
+        chance: 15,
+    },
+    Major_health_potion = {
+        label: "Major health potion",
+        description: "Restore 50 HP",
+        src: "./Assets/items/major_health_potion.png",
+        type: "potion",
+        use: 50,
+        chance: 5,
+    },
+]
+
 // START BY PUTTING ALL INFOS AT THE RIGHT PLACE
 window.onload = function () {
     characterLevel.textContent = player.stats.level;
@@ -75,6 +94,8 @@ const characterExp = document.getElementsByClassName("characterExp")[0];
 const expMax = document.getElementsByClassName("expMax")[0];
 const characterHpBar = document.getElementsByClassName("characterHpBar")[0];
 const hpMax = document.getElementsByClassName("hpMax")[0];
+// INVENTORY ITEMS
+const inventory = document.getElementsByClassName("inventory")[0];
 
 // CHANGE FROM START TO PLAY PANELS
 buttonContinue.addEventListener("click", (e) => {
@@ -94,6 +115,7 @@ buttonHunt.addEventListener("click", (e) => {
         // ADD EXPERIENCE PER HUNT
         fight();
         getExp();
+        getItemsLuck();
     }
 
 });
@@ -103,55 +125,103 @@ buttonCloseHunt.addEventListener("click", (e) => {
     }
 });
 
+inventory.addEventListener("click", (e) => {
+    if (e.target.tagName == "IMG") {
+
+        // Get parent class (inv-x) to find the inventory index
+        let itemParent = e.target.parentElement.classList[1];
+        let inventoryIndex = itemParent.charAt(itemParent.length - 1);
+        let itemToUse;
+
+        // Find the item in the Items array and store it in itemToUse
+        items.forEach(element => {
+            if (element.label == player.inventory[inventoryIndex]) {
+                itemToUse = element;
+            }
+        });
+
+        // Find item's type (maybe use Switch method here)
+        if (itemToUse.type == "potion") {
+            // Add HP to DB
+            player.stats.hp += itemToUse.use;
+            if (player.stats.maxHp < player.stats.hp) {
+                player.stats.hp = 100;
+            }
+            // Change HP visual 
+            characterHpBar.textContent = player.stats.hp + " / " + player.stats.maxHp;
+            hpMax.style.width = (player.stats.hp / player.stats.maxHp) * 100 + "%";
+
+            // Remove item in DB
+            player.inventory[inventoryIndex] = "";
+            // Remove item visual
+            e.target.remove();
+        }
+        else if (itemToUse.type == "buff") {
+
+        }
+    }
+});
+
+// ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------//
+// FUNCTIONS //
 function getExp() {
+    // Add Exp in DB
     player.stats.experience += 10;
     if (player.stats.experience >= levels[player.stats.level]) {
         player.stats.level += 1;
         characterLevel.textContent = player.stats.level;
     }
+    // Change Exp visual 
     characterExp.textContent = player.stats.experience + " / " + levels[player.stats.level];
     expMax.style.width = (player.stats.experience / levels[player.stats.level]) * 100 + "%";
 }
 
 function fight() {
+    // Randomize HP lost
     const random = Math.floor(Math.random() * 10);
+    // Remove HP from DB
     player.stats.hp -= random;
+    // Change HP visual 
     characterHpBar.textContent = player.stats.hp + " / " + player.stats.maxHp;
     hpMax.style.width = (player.stats.hp / player.stats.maxHp) * 100 + "%";
 
     // If maxHp <= 0 THEN DEAD
 }
 
-// ADD AN ITEM WHEN "F" IS PRESSED
-// minor health potion
-addEventListener("keypress", (e) => {
-    if (e.key == "f" && playPanel.style.display == "flex") {
-        // Add item in DB
-        // Check available space in inventory and add item if empty
-        let newIndex = -1;
-        let isEmpty = true;
-        player.items.forEach((element, index) => {
-            if (element == "" && isEmpty == true) {
-                newIndex = index;
-                isEmpty = false;
-            }
-        });
-
-        // If newIndex != -1 (if not full) => add items in the right place in DB
-        // And add it in the right place in inventory
-        let newItem = document.getElementsByClassName("inv-" + newIndex)[0];
-
-        if (newIndex != -1 && !newItem.hasChildNodes()) {
-            player.items[newIndex] = "minor health potion";
-            // Create HTML Visual
-            // Item index == Inventory place
-            newItem.appendChild(document.createElement("img"));
-
-            newItem.childNodes[0].classList.add("inv-item");
-            newItem.childNodes[0].src = "./Assets/16x16 RPG Item Pack/Item__28.png";
+// Check item's luck to see if it's droped
+function getItemsLuck() {
+    items.forEach(element => {
+        if (element.chance >= Math.random() * 100) {
+            itemDrop(element.label, element.src);
         }
-        else {
-            console.log("Inventory Full");
+    });
+}
+
+function itemDrop(itemLabel, itemSrc) {
+    // Add item in DB
+    // Check available space in inventory and add item if empty
+    let newIndex = -1;
+    let isEmpty = true;
+    player.inventory.forEach((element, index) => {
+        if (element == "" && isEmpty == true) {
+            newIndex = index;
+            isEmpty = false;
         }
+    });
+    // If newIndex != -1 (if not full) => add items in the right place in DB
+    // And add it in the right place in inventory
+    let newItem = document.getElementsByClassName("inv-" + newIndex)[0];
+
+    if (newIndex != -1 && !newItem.hasChildNodes()) {
+        player.inventory[newIndex] = itemLabel;
+        // Create HTML Visual
+        // Item index == Inventory place
+        newItem.appendChild(document.createElement("img"));
+
+        newItem.childNodes[0].classList.add("inv-item");
+        newItem.childNodes[0].src = itemSrc;
     }
-});
+    else {
+        console.log("Inventory Full");
+    }
+}
