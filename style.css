@@ -291,10 +291,24 @@ button:active {
 }
 
 .col:active {
-    box-shadow: inset 0 0 10px var(--thirdColor);
-    transform: translateY(1px);
+    box-shadow: inset 0 0 15px var(--thirdColor);
 }
 
 .inv-item {
-    width: 70%;
+    width: 100%;
+    padding: 15px;
+}
+
+.item-description {
+    visibility: hidden;
+    position: absolute;
+    border: 2px solid var(--button);
+    background-color: var(--bg);
+    padding: 0.5em;
+    width: 210px;
+    width: 10.938vw;
+}
+
+.inv-item:hover+span {
+    visibility: visible;
 }
