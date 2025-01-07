@@ -83,7 +83,7 @@ window.onload = function () {
             items.forEach(elem => {
                 if (elem.label == element) {
                     let newItem = document.getElementsByClassName("inv-" + index)[0];
-                    createItem(newItem, elem.label, elem.src, elem.description);
+                    createItem(newItem, elem.label, elem.src, elem.description, index);
                 }
             });
         }
@@ -153,6 +153,8 @@ inventory.addEventListener("click", (e) => {
             }
         });
 
+        if (!itemToUse) return; // Ensure itemToUse is defined
+
         // Find item's type (maybe use Switch method here)
         if (itemToUse.type == "potion") {
             // Add HP to DB
@@ -178,8 +180,10 @@ inventory.addEventListener("click", (e) => {
 
 // Item Description move on mouse hover
 inventory.addEventListener("mousemove", (e) => {
-    let desc = e.target.nextSibling,
-        descChilds = desc.childNodes;
+    let desc = e.target.nextSibling;
+
+    if (!desc) return; // Ensure desc is not null
+
     if (e.target.tagName == "IMG") {
         var x = e.clientX,
             y = e.clientY;
@@ -255,23 +259,71 @@ function itemDrop(itemLabel, itemSrc, itemDesc) {
         player.inventory[newIndex] = itemLabel;
         // Create HTML Visual
         // Item index == Inventory place
-        createItem(newItem, itemLabel, itemSrc, itemDesc);
+        createItem(newItem, itemLabel, itemSrc, itemDesc, newIndex);
     }
     else {
         console.log("Inventory Full");
     }
 }
 
-function createItem(newItem, itemLabel, itemSrc, itemDesc) {
-    // Create Item IMG
-    newItem.appendChild(document.createElement("img"));
-    newItem.childNodes[0].classList.add("inv-item");
-    newItem.childNodes[0].src = itemSrc;
+function allowDrop(ev) {
+    ev.preventDefault();
+}
+
+function drag(ev) {
+    ev.dataTransfer.setData("text/plain", ev.target.id);
+    // Add visibility:hidden to the sibling of the dragged element while dragging
+    ev.target.nextSibling.style = "visibility:hidden";
+}
+
+function drop(ev) {
+    ev.preventDefault();
+    // Get the dragged element and his sibling
+    var data = ev.dataTransfer.getData("text/plain"),
+        draggedElement = document.getElementById(data),
+        draggedElementSibling = draggedElement.nextSibling;
+    // Remove visibility:hidden from the sibling of the dragged element
+    draggedElementSibling.removeAttribute("style");
+    // Add the dragged element in the new inventory with his sibling
+    ev.target.appendChild(draggedElementSibling);
+    ev.target.insertBefore(draggedElement, draggedElementSibling);
+
+    // Change the ID of the dragged element to the new inventory
+    let targetClassSuffix = ev.target.classList[1].split("-")[1],
+        draggedElementId = draggedElement.id,
+        newId = draggedElementId.split("-")[0] + "-" + targetClassSuffix;
+    draggedElement.id = newId;
+
+    // Update the player.inventory
+    let oldIndex = parseInt(draggedElementId.split("-")[1]),
+        newIndex = parseInt(targetClassSuffix);
+    player.inventory[newIndex] = player.inventory[oldIndex];
+    player.inventory[oldIndex] = "";
+}
+
+function createItem(newItem, itemLabel, itemSrc, itemDesc, newIndex) {
+    // Create Item IMG & set all his attributes
+    let img = document.createElement("img");
+    img.classList.add("inv-item");
+    img.src = itemSrc;
+    img.id = "item-" + newIndex;
+    img.draggable = "true";
+    img.setAttribute("ondragstart", "drag(event)");
+    // Then add the item in the right place in the inventory
+    newItem.appendChild(img);
+
     // Create Item Decsription (H1 label & P description)
-    newItem.appendChild(document.createElement("span"));
-    newItem.childNodes[1].classList.add("item-description");
-    newItem.childNodes[1].appendChild(document.createElement("h1"));
-    newItem.childNodes[1].childNodes[0].textContent = itemLabel;
-    newItem.childNodes[1].appendChild(document.createElement("p"));
-    newItem.childNodes[1].childNodes[1].textContent = itemDesc;
+    // Create a Span & add a class to it
+    let span = document.createElement("span");
+    span.classList.add("item-description");
+    // Create H1 & P elements & set their textContent
+    let h1 = document.createElement("h1");
+    h1.textContent = itemLabel;
+    let p = document.createElement("p");
+    p.textContent = itemDesc;
+    // Add H1 & P in the Span
+    span.appendChild(h1);
+    span.appendChild(p);
+    // Add the Span next to the IMG
+    newItem.appendChild(span);
 }

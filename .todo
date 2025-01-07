@@ -1,22 +1,27 @@
-☐ Create "rpg game" in html js @started(24-09-27 12:00)
-☐ Player stats @started(24-09-28 03:26)
-☐ Force, agility, intelligence, speed, endurance
-☐ Btn to "hunt" : get xp or stats @started(24-09-28 05:02)
+☐ Create "rpg game" in html js @started(24-09-27 12:00) 
+☐ Player stats @started(24-09-28 03:26) 
+☐ Force, agility, intelligence, speed, endurance 
+☐ Btn to "hunt" : get xp or stats @started(24-09-28 05:02) 
 ☐ Add abilities, like "slash" or "charge" 
 ☐ Add a level up panel (can add stat points)
 ✔ Add player sprite (pixels) @done(24-09-27 13:33)
 ✔ Add Fonts (Pixelify) @done(24-09-28 03:26)
-☐ "Hunt" get more exp depending on damage / iLevel
-☐ Remove buttonCloseHunt & make buttonHunt an ilimited button (maybe ?)
+☐ "Hunt" get more exp depending on damage / iLevel 
+☐ Remove buttonCloseHunt & make buttonHunt an ilimited button (maybe ?) 
 ☐ Add a Gear Panel @started(24-10-06 04:06)
+    ☐ Html Grid 
+    ☐ Drag and drop 
+        ☐ Gear stats change player stats
+    ☐ Gear Description 
 ☐ Add an Inventory Panel @started(24-10-06 04:07)
     ✔ Items added in iventory (with a key pressed) @done(25-01-04 13:15)
         ☐ Items added when droped after Hunt @started(25-01-04 15:33)
             ✔ Potions @done(25-01-04 15:33)
+            ☐ Gear 
     ✔ Items use @done(25-01-04 15:53)
     ✔ Items description when :hover @done(25-01-06 17:38)
-        ☐ Description change side when wrapped
-    ☐ Items drag and drop
+        ✔ Description change side when wrapped @done(25-01-07 13:19)
+    ✔ Items drag and drop @done(25-01-07 13:19)
  
 - Jianghu / wuxia style
 

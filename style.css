@@ -1,6 +1,21 @@
 body {
     margin: 0;
     background-color: var(--bg);
+
+    /* disable text selection highlighting */
+    -webkit-touch-callout: none;
+    /* iOS Safari */
+    -webkit-user-select: none;
+    /* Safari */
+    -khtml-user-select: none;
+    /* Konqueror HTML */
+    -moz-user-select: none;
+    /* Old versions of Firefox */
+    -ms-user-select: none;
+    /* Internet Explorer/Edge */
+    user-select: none;
+    /* Non-prefixed version, currently
+                                  supported by Chrome, Edge, Opera and Firefox */
 }
 
 :root {
@@ -311,4 +326,64 @@ button:active {
 
 .inv-item:hover+span {
     visibility: visible;
+}
+
+/* ---------- */
+/* -- GEAR -- */
+/* ---------- */
+
+.gear {
+    display: grid;
+    grid-template-columns: 0.5fr 1fr 1fr 1fr 1fr 1fr 1fr 0.5fr;
+    grid-template-rows: 0.5fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 0.5fr;
+    grid-gap: 1em;
+}
+
+.gear div {
+    background-color: #DC5F00;
+}
+
+.gearHead {
+    grid-column: 4 / 6;
+    grid-row: 2 / 4;
+}
+
+.gearAmulet {
+    grid-column: 6;
+    grid-row: 3;
+}
+
+.gear1stWeapon {
+    grid-column: 2 / 4;
+    grid-row: 4 / 7;
+}
+
+.gearChest {
+    grid-column: 4 / 6;
+    grid-row: 4 / 6;
+}
+
+.gear2ndWeapon {
+    grid-column: 6 / 8;
+    grid-row: 4 / 7;
+}
+
+.gearBelt {
+    grid-column: 4 / 6;
+    grid-row: 6;
+}
+
+.gear1stRing {
+    grid-column: 3;
+    grid-row: 7;
+}
+
+.gearFeet {
+    grid-column: 4 / 6;
+    grid-row: 7 / 9;
+}
+
+.gear2ndRing {
+    grid-column: 6;
+    grid-row: 7;
 }
