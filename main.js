@@ -53,6 +53,7 @@ levels = {
 }
 
 items = [
+    // Potions
     Minor_health_potion = {
         label: "Minor health potion",
         description: "Restore 20 HP",
@@ -69,6 +70,7 @@ items = [
         use: 50,
         chance: 5,
     },
+    // Gear
     Training_sword = {
         label: "Training sword",
         description: "A wooden sword given to new adventurers",
