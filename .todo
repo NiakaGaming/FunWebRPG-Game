@@ -18,7 +18,7 @@
         ☐ Items added when droped after Hunt @started(25-01-04 15:33)
             ✔ Potions @done(25-01-04 15:33)
             ☐ Gear 
-                ☐ Gear Description (Stats) 
+                ✔ Gear Description (Stats) @done(25-01-13 16:18)
                 ✔ Training Sword @done(25-01-13 15:35)
                 ☐ Simple Boots 
                 ☐ Simple Chest 
@@ -36,16 +36,17 @@
     ✔ When drag and drop on the same slot, the item is not really "there" but still in the inventory (should still be there and clickable) @done(25-01-07 15:38)
     ✔ When drag and drop on an occupied slot, make it desapeared @done(25-01-07 15:38)
     ✔ 'Inventory full' even though not full (maybe not removing right item in inventory when clicking on it) @done(25-01-13 13:58)
+    ☐ New item can be used as a potion (Review code potion use) 
 
 - Ideas
-☐ Jianghu / wuxia style 
+    - Jianghu / wuxia style 
 
 - Stats
-    ☐ Force : damage melee & health 
-    ☐ Agility : damage range & accuracy 
-    ☐ Intelligence : damage magic & mana 
-    ☐ Speed : attack speed & dodge 
-    ☐ Defense : armor & resistance 
+    - Force : damage melee & health 
+    - Agility : damage range & accuracy 
+    - Intelligence : damage magic & mana 
+    - Speed : attack speed & dodge 
+    - Defense : armor & resistance 
 
 'Alt+Enter' // Triggers `Todo: Toggle Box`
 'Alt+D' // Triggers `Todo: Toggle Done`

@@ -75,13 +75,13 @@ items = [
         label: "Training sword",
         description: "A wooden sword given to new adventurers",
         stats: {
-            strenght: (2, 5),
-            dexterity: (1, 2),
-            speed: (2, 3),
+            strenght: [2, 5],
+            dexterity: [1, 2],
+            speed: [2, 3],
         },
         src: "./Assets/items/training_sword.png",
         type: "weapon",
-        chance: 10,
+        chance: 100,
     },
 ]
 
@@ -177,7 +177,7 @@ inventory.addEventListener("click", (e) => {
                 player.stats.hp = 100;
             }
             // Change HP visual 
-            characterHpBar.textContent = player.stats.hp + " / " + player.stats.maxHp;
+            characterHpBar.textContent = `${player.stats.hp} / ${player.stats.maxHp}`;
             hpMax.style.width = (player.stats.hp / player.stats.maxHp) * 100 + "%";
 
             // Remove item in DB
@@ -207,7 +207,7 @@ inventory.addEventListener("mousemove", (e) => {
         // Check if Span is outside of viewport
         let rect = desc.getBoundingClientRect();
         // Span right side compared to viewport width
-        if ((rect.right) > window.innerWidth) {
+        if (rect.right > window.innerWidth) {
             desc.style.left = (x - desc.clientWidth - 10) + "px";
         }
         // More conditions (left side, top side, bottom side)
@@ -226,7 +226,7 @@ function getExp() {
         characterLevel.textContent = player.stats.level;
     }
     // Change Exp visual 
-    characterExp.textContent = player.stats.experience + " / " + levels[player.stats.level];
+    characterExp.textContent = `${player.stats.experience} /  ${levels[player.stats.level]}`;
     expMax.style.width = (player.stats.experience / levels[player.stats.level]) * 100 + "%";
 }
 
@@ -236,7 +236,7 @@ function fight() {
     // Remove HP from DB
     player.stats.hp -= random;
     // Change HP visual 
-    characterHpBar.textContent = player.stats.hp + " / " + player.stats.maxHp;
+    characterHpBar.textContent = `${player.stats.hp} /  ${player.stats.maxHp}`;
     hpMax.style.width = (player.stats.hp / player.stats.maxHp) * 100 + "%";
 
     // ----------------------- //
@@ -248,12 +248,12 @@ function fight() {
 function getItemsLuck() {
     items.forEach(element => {
         if (element.chance >= Math.random() * 100) {
-            itemDrop(element.label, element.src, element.description);
+            itemDrop(element.label, element.src, element.description, element.stats);
         }
     });
 }
 
-function itemDrop(itemLabel, itemSrc, itemDesc) {
+function itemDrop(itemLabel, itemSrc, itemDesc, itemStats) {
     // Add item in DB
     // Check available space in inventory and add item if empty
     let newIndex = -1,
@@ -274,17 +274,53 @@ function itemDrop(itemLabel, itemSrc, itemDesc) {
         player.inventory[newIndex] = itemLabel;
         // Create HTML Visual
         // Item index == Inventory place
-        createItem(newItem, itemLabel, itemSrc, itemDesc, newIndex);
+        createItem(newItem, itemLabel, itemSrc, itemDesc, newIndex, itemStats);
     }
     else {
         console.log("Inventory Full");
     }
 }
 
+function createItem(newItem, itemLabel, itemSrc, itemDesc, newIndex, itemStats) {
+    // Create Item IMG & set all his attributes
+    let img = document.createElement("img");
+    img.classList.add("inv-item");
+    img.src = itemSrc;
+    img.id = "item-" + newIndex;
+    img.draggable = "true";
+    img.setAttribute("ondragstart", "drag(event)");
+    // Then add the item in the right place in the inventory
+    newItem.appendChild(img);
+
+    // Create Item Decsription (H1 label & P description)
+    // Create a Span & add a class to it
+    let span = document.createElement("span");
+    span.classList.add("item-description");
+    // Create H1 & P elements & set their textContent
+    let h1 = document.createElement("h1");
+    h1.textContent = itemLabel;
+    let p = document.createElement("p");
+    p.textContent = itemDesc;
+    // Add H1 & P in the Span
+    span.appendChild(h1);
+    span.appendChild(p);
+    // Add the Span next to the IMG
+    newItem.appendChild(span);
+
+    // Create Item Stats if Item has stats
+    if (itemStats) {
+        for (const [key, value] of Object.entries(itemStats)) {
+            let rndValue = Math.floor(Math.random() * (value[1] - value[0] + 1) + value[0]);
+            let p = document.createElement("p");
+            p.textContent = `${key}: ${rndValue}`;
+            span.appendChild(p);
+        }
+    }
+}
+
 // ------------- //
 // DRAG AND DROP //
 // ------------- //
-
 function allowDrop(ev) {
     ev.preventDefault();
 }
@@ -327,31 +363,4 @@ function drop(ev) {
     // Update the player.inventory
     player.inventory[targetIndex] = player.inventory[sourceIndex];
     player.inventory[sourceIndex] = "";
-}
-
-function createItem(newItem, itemLabel, itemSrc, itemDesc, newIndex) {
-    // Create Item IMG & set all his attributes
-    let img = document.createElement("img");
-    img.classList.add("inv-item");
-    img.src = itemSrc;
-    img.id = "item-" + newIndex;
-    img.draggable = "true";
-    img.setAttribute("ondragstart", "drag(event)");
-    // Then add the item in the right place in the inventory
-    newItem.appendChild(img);
-
-    // Create Item Decsription (H1 label & P description)
-    // Create a Span & add a class to it
-    let span = document.createElement("span");
-    span.classList.add("item-description");
-    // Create H1 & P elements & set their textContent
-    let h1 = document.createElement("h1");
-    h1.textContent = itemLabel;
-    let p = document.createElement("p");
-    p.textContent = itemDesc;
-    // Add H1 & P in the Span
-    span.appendChild(h1);
-    span.appendChild(p);
-    // Add the Span next to the IMG
-    newItem.appendChild(span);
 }
