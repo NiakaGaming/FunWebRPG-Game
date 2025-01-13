@@ -9,6 +9,12 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Micro+5+Charted&display=swap" rel="stylesheet">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Micro+5+Charted&family=Sixtyfour+Convergence&family=Tiny5&display=swap"
+        rel="stylesheet">
     <!-- MY STYLE -->
     <link rel="stylesheet" href="./style.css">
     <title>Fun Web RPG Game</title>
@@ -28,7 +34,7 @@
         <div class="player">
             <!-- CHARACTERS STAT -->
             <ul>
-                <li class="level">
+                <li class="player-bar">
                     <div>
                         Level <span class="characterLevel"></span>
                     </div>
@@ -37,7 +43,7 @@
                         <p class="characterExp">0 / 25</p>
                     </div>
                 </li>
-                <li class="hp">
+                <li class="player-bar">
                     <div>
                         Health
                     </div>
@@ -46,47 +52,61 @@
                         <p class="characterHpBar">100 / 100</p>
                     </div>
                 </li>
+                <li class="player-bar">
+                    <div>
+                        Mana
+                    </div>
+                    <div>
+                        <div class="mpMax"></div>
+                        <p class="characterMpBar">10 / 10</p>
+                    </div>
                 </li>
-                <li>Defense</li>
+                </li>
                 <li>iLevel</li>
+                <li>Defense</li>
                 <li>Strenght</li>
                 <li>Dexterity</li>
                 <li>Intelligence</li>
-                <li>Consitution</li>
                 <li>Speed</li>
+                <li>DPS</li>
             </ul>
 
             <!-- CHARACTERS AVATAR -->
-            <img src="./character_nobg.png" alt="">
+            <div class="avatar">
+                <img src="./character_nobg.png" alt="">
+            </div>
 
             <!-- CHARACTERS GEAR -->
             <div class="gear">
+                <div class="gearGloves" ondrop="drop(event)" ondragover="allowDrop(event)">
+                    <img src="./Assets/items/simple_gloves.png" alt="">
+                </div>
                 <div class="gearHead" ondrop="drop(event)" ondragover="allowDrop(event)">
-                    Head
+                    <img src="./Assets/items/simple_helmet.png" alt="">
                 </div>
                 <div class="gearAmulet" ondrop="drop(event)" ondragover="allowDrop(event)">
-                    Amulet
+                    <img src="./Assets/items/sorcerer_amulet.png" alt="">
                 </div>
                 <div class="gear1stWeapon" ondrop="drop(event)" ondragover="allowDrop(event)">
-                    Weapon 1
+                    <img src="./Assets/items/training_sword.png" alt="">
                 </div>
                 <div class="gearChest" ondrop="drop(event)" ondragover="allowDrop(event)">
-                    Torso
+                    <img src="./Assets/items/simple_chest.png" alt="">
                 </div>
                 <div class="gear2ndWeapon" ondrop="drop(event)" ondragover="allowDrop(event)">
-                    Weapon 2
+                    <img src="./Assets/items/wooden_shield.png" alt="">
                 </div>
                 <div class="gearBelt" ondrop="drop(event)" ondragover="allowDrop(event)">
-                    Belt
+                    <img src="" alt="">
                 </div>
                 <div class="gear1stRing" ondrop="drop(event)" ondragover="allowDrop(event)">
-                    Ring 1
+                    <img src="./Assets/items/simple_ring.png" alt="">
                 </div>
                 <div class="gearFeet" ondrop="drop(event)" ondragover="allowDrop(event)">
-                    Boots
+                    <img src="./Assets/items/simple_boots.png" alt="">
                 </div>
                 <div class="gear2ndRing" ondrop="drop(event)" ondragover="allowDrop(event)">
-                    Ring 2
+                    <img src="./Assets/items/constitution_ring.png" alt="">
                 </div>
             </div>
 
@@ -116,6 +136,13 @@
                     <div class="col inv-14" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
                     <div class="col inv-15" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
                 </div>
+            </div>
+
+            <div class="utils">
+                <img src="./Assets/items/trash-can.png" alt="">
+                <img src="./Assets/items/trash-can.png" alt="">
+                <img src="./Assets/items/trash-can.png" alt="">
+                <img src="./Assets/items/trash-can.png" alt="">
             </div>
 
         </div>

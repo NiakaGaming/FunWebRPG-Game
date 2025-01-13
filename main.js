@@ -13,7 +13,7 @@ player = {
         experience: 0,
         hp: 100,
         maxHp: 100,
-        // mp: 0,
+        mp: 10,
     },
     gear: {
         weapon: "wooden sword",
@@ -68,6 +68,18 @@ items = [
         type: "potion",
         use: 50,
         chance: 5,
+    },
+    Training_sword = {
+        label: "Training sword",
+        description: "A wooden sword given to new adventurers",
+        stats: {
+            strenght: (2, 5),
+            dexterity: (1, 2),
+            speed: (2, 3),
+        },
+        src: "./Assets/items/training_sword.png",
+        type: "weapon",
+        chance: 10,
     },
 ]
 
@@ -250,6 +262,7 @@ function itemDrop(itemLabel, itemSrc, itemDesc) {
             isEmpty = false;
         }
     });
+    isEmpty = true;
 
     // If newIndex != -1 (if not full) => add items in the right place in DB
     // And add it in the right place in inventory
@@ -265,6 +278,10 @@ function itemDrop(itemLabel, itemSrc, itemDesc) {
         console.log("Inventory Full");
     }
 }
+
+// ------------- //
+// DRAG AND DROP //
+// ------------- //
 
 function allowDrop(ev) {
     ev.preventDefault();
@@ -282,6 +299,17 @@ function drop(ev) {
     var data = ev.dataTransfer.getData("text/plain"),
         draggedElement = document.getElementById(data),
         draggedElementSibling = draggedElement.nextSibling;
+
+    // Prevent drop if the source and target indices are the same
+    if (ev.target.classList.length !== 2) {
+        draggedElementSibling.removeAttribute("style");
+        return;
+    }
+
+    // Get the source and target indices
+    let sourceIndex = parseInt(draggedElement.id.split("-")[1]);
+    let targetIndex = parseInt(ev.target.classList[1].split("-")[1]);
+
     // Remove visibility:hidden from the sibling of the dragged element
     draggedElementSibling.removeAttribute("style");
     // Add the dragged element in the new inventory with his sibling
@@ -295,10 +323,8 @@ function drop(ev) {
     draggedElement.id = newId;
 
     // Update the player.inventory
-    let oldIndex = parseInt(draggedElementId.split("-")[1]),
-        newIndex = parseInt(targetClassSuffix);
-    player.inventory[newIndex] = player.inventory[oldIndex];
-    player.inventory[oldIndex] = "";
+    player.inventory[targetIndex] = player.inventory[sourceIndex];
+    player.inventory[sourceIndex] = "";
 }
 
 function createItem(newItem, itemLabel, itemSrc, itemDesc, newIndex) {

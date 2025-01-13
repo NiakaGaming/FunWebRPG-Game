@@ -14,8 +14,7 @@ body {
     -ms-user-select: none;
     /* Internet Explorer/Edge */
     user-select: none;
-    /* Non-prefixed version, currently
-                                  supported by Chrome, Edge, Opera and Firefox */
+    /* Non-prefixed version, currently supported by Chrome, Edge, Opera and Firefox */
 }
 
 :root {
@@ -27,21 +26,16 @@ body {
     --thirdColor: #EEEEEE;
 }
 
-@font-face {
-    font-family: "Pixelify";
-    src: url(./PixelifySans-VariableFont_wght.ttf);
-    font-weight: normal;
-}
-
 p,
 ul,
 li,
-button {
+button,
+html {
     /* FONTS */
-    font-family: "Pixelify";
-    font-optical-sizing: auto;
-    font-weight: normal;
+    font-family: "Tiny5", serif;
+    font-weight: 400;
     font-style: normal;
+
 }
 
 /* ------------- */
@@ -147,14 +141,25 @@ button:active {
 /* -- PLAYER -- */
 /* ------------- */
 .player {
-    display: flex;
-    width: 80%;
+    /* display: flex;
     justify-content: space-around;
-    align-items: center;
+    align-items: center; */
+    width: 80%;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr 0.3fr;
+
 }
 
-.player>img {
+.avatar {
     background-color: #373A40;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.avatar>img {
+    width: 85%;
+    padding: 10px;
 }
 
 .player>ul {
@@ -169,6 +174,8 @@ button:active {
     flex-direction: column;
     justify-content: space-evenly;
     align-items: flex-start;
+
+    margin: 0;
 }
 
 .player>ul>li {
@@ -176,7 +183,7 @@ button:active {
     padding: 0 10px;
     background-clip: padding-box;
     border-bottom: 2px solid var(--bg);
-    width: 94.9%;
+    width: 94.5%;
     font-size: 0.925rem;
     height: 100%;
     align-content: center;
@@ -188,29 +195,42 @@ button:active {
 
 .player>* {
     flex: 2;
+    width: 100%;
     height: 100%;
     border: 2px solid var(--button-active);
 }
 
-/* ----------- */
-/* -- LEVEL -- */
-/* ----------- */
-.level {
+/* ----------------------- */
+/* -- PLAYER STATS BARS -- */
+/* ----------------------- */
+.player-bar {
     display: flex;
+    align-items: center;
     padding: 0 !important;
     width: 100% !important;
 }
 
-.level>div:nth-child(1) {
+.player-bar>div:nth-child(1) {
     width: 25%;
     padding: 8px 10px;
 }
 
-.level>div:nth-child(2) {
+.player-bar>div:nth-child(2) {
+    display: flex;
+    align-items: center;
     width: 75%;
+    height: 75%;
     background-color: var(--bg);
-    border: 2px solid var(--bgContrast);
+    border: 2px solid var(--bg);
     position: relative;
+    margin-right: 5px;
+}
+
+.player-bar>div:nth-child(2)>p {
+    position: absolute;
+    left: 50%;
+    transform: translate(-50%);
+    margin: 0;
 }
 
 .expMax {
@@ -221,35 +241,6 @@ button:active {
     text-align: center;
 }
 
-.level>div:nth-child(2)>p {
-    position: absolute;
-    left: 50%;
-    top: 0%;
-    transform: translate(-50%, -50%);
-}
-
-/* -------- */
-/* -- HP -- */
-/* -------- */
-
-.hp {
-    display: flex;
-    padding: 0 !important;
-    width: 100% !important;
-}
-
-.hp>div:nth-child(1) {
-    width: 25%;
-    padding: 8px 10px;
-}
-
-.hp>div:nth-child(2) {
-    width: 75%;
-    background-color: var(--bg);
-    border: 2px solid var(--bgContrast);
-    position: relative;
-}
-
 .hpMax {
     background: red;
     width: 100%;
@@ -258,11 +249,12 @@ button:active {
     text-align: center;
 }
 
-.hp>div:nth-child(2)>p {
-    position: absolute;
-    left: 50%;
-    top: 0%;
-    transform: translate(-50%, -50%);
+.mpMax {
+    background: rgba(0, 0, 255, 0.548);
+    width: 100%;
+    height: 100%;
+    align-content: center;
+    text-align: center;
 }
 
 /* ---------------- */
@@ -340,7 +332,21 @@ button:active {
 }
 
 .gear div {
-    background-color: #DC5F00;
+    background-color: var(--bgContrast);
+    border: 2px solid var(--button);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.gear div img {
+    width: 100%;
+    padding: 10px;
+}
+
+.gearGloves {
+    grid-column: 2 / 4;
+    grid-row: 2 / 4;
 }
 
 .gearHead {
@@ -386,4 +392,21 @@ button:active {
 .gear2ndRing {
     grid-column: 6;
     grid-row: 7;
+}
+
+/* ------- */
+/* UTILITY */
+/* ------- */
+.utils {
+    display: grid;
+}
+
+.utils>img {
+    width: 100%;
+    height: 100%;
+    border: 2px solid var(--button-active);
+}
+
+.utils>img:nth-child(4) {
+    border-bottom: 0;
 }
